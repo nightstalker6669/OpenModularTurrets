@@ -15,9 +15,9 @@ public class TurretSettings {
         builder.push(name);
         this. powerUsage = builder.comment("Power usage for " + name).defineInRange("power_usage", powerUsage,0, Integer.MAX_VALUE);
         this.range = builder.comment("Range for " + name).defineInRange("range", range, 0, Integer.MAX_VALUE);
-        this.fireRate = builder.comment("Fire rate for " + name).defineInRange("fire_rate", fireRate, 0, Double.MAX_VALUE);
-        this.damage = builder.comment("Damage for " + name).defineInRange("damage", damage, 0, Double.MAX_VALUE);
-        this.damageAddonModifierMaxHP = builder.comment("Damage addon modifier max HP for " + name).defineInRange("damage_addon_modifier_max_hp", damageAddonModifierMaxHP, 0, Double.MAX_VALUE);
+        this.fireRate = builder.comment("Fire rate for " + name).defineInRange("fire_rate", fireRate, 0D, Double.MAX_VALUE);
+        this.damage = builder.comment("Damage for " + name).defineInRange("damage", damage, 0D, Double.MAX_VALUE);
+        this.damageAddonModifierMaxHP = builder.comment("Damage addon modifier max HP for " + name).defineInRange("damage_addon_modifier_max_hp", damageAddonModifierMaxHP, 0D, Double.MAX_VALUE);
         builder.pop();
     }
 
@@ -27,7 +27,7 @@ public class TurretSettings {
         builder.push(name);
         this. powerUsage = builder.comment("Power usage for " + name).defineInRange("power_usage", powerUsage,0, Integer.MAX_VALUE);
         this.range = builder.comment("Range for " + name).defineInRange("range", range, 0, Integer.MAX_VALUE);
-        this.fireRate = builder.comment("Fire rate for " + name).defineInRange("fire_rate", fireRate, 0, Double.MAX_VALUE);
+        this.fireRate = builder.comment("Fire rate for " + name).defineInRange("fire_rate", fireRate, 0D, Double.MAX_VALUE);
         this.damage = builder.comment("[NOT USED] Damage for " + name).defineInRange("damage", 0D, 0D, 0D);
         this.damageAddonModifierMaxHP = builder.comment("[NOT USED] Damage addon modifier max HP for " + name).defineInRange("damage_addon_modifier_max_hp", 0D, 0D, 0D);
         builder.pop();

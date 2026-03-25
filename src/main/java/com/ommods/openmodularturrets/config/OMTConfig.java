@@ -6,6 +6,8 @@ import org.apache.commons.lang3.tuple.Pair;
 public class OMTConfig {
     public static ForgeConfigSpec serverConfigSpec;
     public static ForgeConfigSpec commonConfigSpec;
+    public static ServerConfig serverConfig;
+    public static CommonConfig commonConfig;
 
 
 
@@ -56,40 +58,41 @@ public class OMTConfig {
                 .configure(CommonConfig::new);
 
 
-        // Store pair values in some constant field
+        serverConfig = serverPair.getLeft();
+        commonConfig = commonPair.getLeft();
         serverConfigSpec = serverPair.getValue();
         commonConfigSpec = commonPair.getValue();
 
-        General.recipes = serverConfigSpec.get("general.recipes");
-        Permission.canOPAccessOwnedBlocks = serverConfigSpec.get("canOPAccessOwnedBlocks");
-        Permission.offlineModeSupport = serverConfigSpec.get("offlineModeSupport");
+        General.recipes = serverConfig.recipes.get();
+        Permission.canOPAccessOwnedBlocks = serverConfig.canOPAccessOwnedBlocks.get();
+        Permission.offlineModeSupport = serverConfig.offlineModeSupport.get();
 
-        Debug.doDebugChat = commonConfigSpec.get("doDebugChat");
-        Debug.debugLogging = commonConfigSpec.get("debugLogging");
+        Debug.doDebugChat = commonConfig.doDebugChat.get();
+        Debug.debugLogging = commonConfig.debugLogging.get();
 
-        TurretBase.baseTier1MaxCharge = serverConfigSpec.get("baseTier1MaxCharge");
-        TurretBase.baseTier1MaxTransferRate = serverConfigSpec.get("baseTier1MaxTransferRate");
-        TurretBase.baseTier1BlastResistance = serverConfigSpec.get("baseTier1BlastResistance");
-        TurretBase.baseTier1DestroySpeed = serverConfigSpec.get("baseTier1DestroySpeed");
+        TurretBase.baseTier1MaxCharge = serverConfig.baseTier1MaxCharge.get();
+        TurretBase.baseTier1MaxTransferRate = serverConfig.baseTier1MaxTransferRate.get();
+        TurretBase.baseTier1BlastResistance = serverConfig.baseTier1BlastResistance.get();
+        TurretBase.baseTier1DestroySpeed = serverConfig.baseTier1DestroySpeed.get();
 
-        TurretBase.baseTier2MaxCharge = serverConfigSpec.get("baseTier2MaxCharge");
-        TurretBase.baseTier2MaxTransferRate = serverConfigSpec.get("baseTier2MaxTransferRate");
-        TurretBase.baseTier2BlastResistance = serverConfigSpec.get("baseTier2BlastResistance");
-        TurretBase.baseTier2DestroySpeed = serverConfigSpec.get("baseTier2DestroySpeed");
+        TurretBase.baseTier2MaxCharge = serverConfig.baseTier2MaxCharge.get();
+        TurretBase.baseTier2MaxTransferRate = serverConfig.baseTier2MaxTransferRate.get();
+        TurretBase.baseTier2BlastResistance = serverConfig.baseTier2BlastResistance.get();
+        TurretBase.baseTier2DestroySpeed = serverConfig.baseTier2DestroySpeed.get();
 
-        TurretBase.baseTier3MaxCharge = serverConfigSpec.get("baseTier3MaxCharge");
-        TurretBase.baseTier3MaxTransferRate = serverConfigSpec.get("baseTier3MaxTransferRate");
-        TurretBase.baseTier3BlastResistance = serverConfigSpec.get("baseTier3BlastResistance");
-        TurretBase.baseTier3DestroySpeed = serverConfigSpec.get("baseTier3DestroySpeed");
+        TurretBase.baseTier3MaxCharge = serverConfig.baseTier3MaxCharge.get();
+        TurretBase.baseTier3MaxTransferRate = serverConfig.baseTier3MaxTransferRate.get();
+        TurretBase.baseTier3BlastResistance = serverConfig.baseTier3BlastResistance.get();
+        TurretBase.baseTier3DestroySpeed = serverConfig.baseTier3DestroySpeed.get();
 
-        TurretBase.baseTier4MaxCharge = serverConfigSpec.get("baseTier4MaxCharge");
-        TurretBase.baseTier4MaxTransferRate = serverConfigSpec.get("baseTier4MaxTransferRate");
-        TurretBase.baseTier4BlastResistance = serverConfigSpec.get("baseTier4BlastResistance");
-        TurretBase.baseTier4DestroySpeed = serverConfigSpec.get("baseTier4DestroySpeed");
+        TurretBase.baseTier4MaxCharge = serverConfig.baseTier4MaxCharge.get();
+        TurretBase.baseTier4MaxTransferRate = serverConfig.baseTier4MaxTransferRate.get();
+        TurretBase.baseTier4BlastResistance = serverConfig.baseTier4BlastResistance.get();
+        TurretBase.baseTier4DestroySpeed = serverConfig.baseTier4DestroySpeed.get();
 
-        TurretBase.baseTier5MaxCharge = serverConfigSpec.get("baseTier5MaxCharge");
-        TurretBase.baseTier5MaxTransferRate = serverConfigSpec.get("baseTier5MaxTransferRate");
-        TurretBase.baseTier5BlastResistance = serverConfigSpec.get("baseTier5BlastResistance");
-        TurretBase.baseTier5DestroySpeed = serverConfigSpec.get("baseTier5DestroySpeed");
+        TurretBase.baseTier5MaxCharge = serverConfig.baseTier5MaxCharge.get();
+        TurretBase.baseTier5MaxTransferRate = serverConfig.baseTier5MaxTransferRate.get();
+        TurretBase.baseTier5BlastResistance = serverConfig.baseTier5BlastResistance.get();
+        TurretBase.baseTier5DestroySpeed = serverConfig.baseTier5DestroySpeed.get();
     }
 }

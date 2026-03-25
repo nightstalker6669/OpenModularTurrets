@@ -4,8 +4,8 @@ public enum UpgradeEffect {
     SPEED("Speed", "Increases the speed of the base's turrets", 0.05),
     RANGE("Range", "Increases the range of the base's turrets", 0.05),
     AMMO_CAPACITY("Ammo Capacity", "Increases the ammo capacity of the base", 0.25),
-    ACCURACY("Accuracy", "Increases the accuracy of the base's turrets", 0.05);
-    //TODO: add localization
+    ACCURACY("Accuracy", "Increases the accuracy of the base's turrets", 0.05),
+    SCATTER_SHOT("Scatter Shot", "Adds extra spread projectiles to turret fire", 1.0);
     final String name;
     final String description;
     double value;
