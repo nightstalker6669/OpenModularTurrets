@@ -1,11 +1,12 @@
 package com.ommods.openmodularturrets.content.block.turret_bases;
 
+import com.mojang.serialization.MapCodec;
 import com.ommods.openmodularturrets.config.OMTConfig;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
 
 public class TurretBaseBlockTier2 extends TurretBaseBlock {
-    public static final BlockBehaviour.Properties properties = BlockBehaviour.Properties.of(Material.METAL)
+    public static final MapCodec<TurretBaseBlockTier2> CODEC = simpleCodec(TurretBaseBlockTier2::new);
+    public static final BlockBehaviour.Properties properties = BlockBehaviour.Properties.of()
             .destroyTime(OMTConfig.TurretBase.baseTier2DestroySpeed)
             .explosionResistance(OMTConfig.TurretBase.baseTier2BlastResistance);
 
@@ -16,5 +17,10 @@ public class TurretBaseBlockTier2 extends TurretBaseBlock {
     @Override
     protected int getTier() {
         return 2;
+    }
+
+    @Override
+    protected MapCodec<? extends TurretBaseBlock> codec() {
+        return CODEC;
     }
 }
