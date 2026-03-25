@@ -1,0 +1,6 @@
+{
+  "parent": "openmodularturrets:block/generic_turret_inventory",
+  "textures": {
+    "texture": "openmodularturrets:block/potato_cannon_turret"
+  }
+}

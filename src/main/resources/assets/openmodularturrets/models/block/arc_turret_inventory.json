@@ -1,0 +1,7 @@
+{
+  "parent": "openmodularturrets:block/generic_turret_inventory",
+  "textures": {
+    "texture": "openmodularturrets:block/arc_turret",
+    "particle": "openmodularturrets:block/arc_turret"
+  }
+}

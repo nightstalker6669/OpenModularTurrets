@@ -1,3 +1,6 @@
 {
-  "parent": "builtin/entity"
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "openmodularturrets:block/laser_turret"
+  }
 }

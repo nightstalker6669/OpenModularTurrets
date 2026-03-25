@@ -1,3 +1,105 @@
 {
-  "parent": "builtin/entity"
+  "parent": "minecraft:block/block",
+  "textures": {
+    "texture": "openmodularturrets:block/machine_gun_turret",
+    "particle": "openmodularturrets:block/machine_gun_turret"
+  },
+  "elements": [
+    {
+      "from": [2, 0, 2],
+      "to": [14, 1, 14],
+      "faces": {
+        "down": {"uv": [2, 2, 14, 14], "texture": "#texture"},
+        "up": {"uv": [2, 2, 14, 14], "texture": "#texture"},
+        "north": {"uv": [2, 15, 14, 16], "texture": "#texture"},
+        "south": {"uv": [2, 15, 14, 16], "texture": "#texture"},
+        "west": {"uv": [2, 15, 14, 16], "texture": "#texture"},
+        "east": {"uv": [2, 15, 14, 16], "texture": "#texture"}
+      }
+    },
+    {
+      "from": [6, 1, 6],
+      "to": [10, 5, 10],
+      "faces": {
+        "down": {"uv": [0, 0, 4, 4], "texture": "#texture"},
+        "up": {"uv": [0, 0, 4, 4], "texture": "#texture"},
+        "north": {"uv": [0, 0, 4, 4], "texture": "#texture"},
+        "south": {"uv": [0, 0, 4, 4], "texture": "#texture"},
+        "west": {"uv": [0, 0, 4, 4], "texture": "#texture"},
+        "east": {"uv": [0, 0, 4, 4], "texture": "#texture"}
+      }
+    },
+    {
+      "from": [4, 5, 4],
+      "to": [12, 6, 12],
+      "faces": {
+        "down": {"uv": [0, 0, 8, 8], "texture": "#texture"},
+        "up": {"uv": [0, 0, 8, 8], "texture": "#texture"},
+        "north": {"uv": [0, 0, 8, 1], "texture": "#texture"},
+        "south": {"uv": [0, 0, 8, 1], "texture": "#texture"},
+        "west": {"uv": [0, 0, 8, 1], "texture": "#texture"},
+        "east": {"uv": [0, 0, 8, 1], "texture": "#texture"}
+      }
+    },
+    {
+      "from": [3, 6, 4],
+      "to": [4, 10, 12],
+      "faces": {
+        "down": {"uv": [0, 15, 1, 23], "texture": "#texture"},
+        "up": {"uv": [0, 15, 1, 23], "texture": "#texture"},
+        "north": {"uv": [0, 15, 1, 19], "texture": "#texture"},
+        "south": {"uv": [0, 15, 1, 19], "texture": "#texture"},
+        "west": {"uv": [0, 15, 8, 19], "texture": "#texture"},
+        "east": {"uv": [0, 15, 8, 19], "texture": "#texture"}
+      }
+    },
+    {
+      "from": [12, 6, 4],
+      "to": [13, 10, 12],
+      "faces": {
+        "down": {"uv": [0, 15, 1, 23], "texture": "#texture"},
+        "up": {"uv": [0, 15, 1, 23], "texture": "#texture"},
+        "north": {"uv": [0, 15, 1, 19], "texture": "#texture"},
+        "south": {"uv": [0, 15, 1, 19], "texture": "#texture"},
+        "west": {"uv": [0, 15, 8, 19], "texture": "#texture"},
+        "east": {"uv": [0, 15, 8, 19], "texture": "#texture"}
+      }
+    },
+    {
+      "from": [4, 10, 7],
+      "to": [12, 11, 9],
+      "faces": {
+        "down": {"uv": [0, 0, 8, 1], "texture": "#texture"},
+        "up": {"uv": [0, 0, 8, 1], "texture": "#texture"},
+        "north": {"uv": [0, 0, 8, 1], "texture": "#texture"},
+        "south": {"uv": [0, 0, 8, 1], "texture": "#texture"},
+        "west": {"uv": [0, 0, 2, 1], "texture": "#texture"},
+        "east": {"uv": [0, 0, 2, 1], "texture": "#texture"}
+      }
+    },
+    {
+      "from": [6, 6, 6],
+      "to": [10, 14, 14],
+      "faces": {
+        "down": {"uv": [36, 0, 40, 8], "texture": "#texture"},
+        "up": {"uv": [36, 0, 40, 8], "texture": "#texture"},
+        "north": {"uv": [36, 0, 40, 8], "texture": "#texture"},
+        "south": {"uv": [36, 0, 40, 8], "texture": "#texture"},
+        "west": {"uv": [36, 0, 44, 8], "texture": "#texture"},
+        "east": {"uv": [36, 0, 44, 8], "texture": "#texture"}
+      }
+    },
+    {
+      "from": [7, 9, 0],
+      "to": [9, 11, 14],
+      "faces": {
+        "down": {"uv": [32, 21, 34, 35], "texture": "#texture"},
+        "up": {"uv": [32, 21, 34, 35], "texture": "#texture"},
+        "north": {"uv": [32, 21, 34, 23], "texture": "#texture"},
+        "south": {"uv": [32, 21, 34, 23], "texture": "#texture"},
+        "west": {"uv": [32, 21, 46, 23], "texture": "#texture"},
+        "east": {"uv": [32, 21, 46, 23], "texture": "#texture"}
+      }
+    }
+  ]
 }

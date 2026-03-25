@@ -1,5 +1,6 @@
 package com.ommods.openmodularturrets.content.item.ammo;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 
 public class AmmoStorageLogic {
@@ -11,6 +12,29 @@ public class AmmoStorageLogic {
     public AmmoStorageLogic(int storageCapacity) {
         this.MAX_STORAGE_CAPACITY = storageCapacity;
 
+    }
+
+    public AmmoInsertResult tryInsertAmmo(ItemStack ammoStack) {
+        if (!(ammoStack.getItem() instanceof AmmoItem ammoItem) || ammoStack.isEmpty()) {
+            return new AmmoInsertResult(false, ammoStack);
+        }
+
+        int typeIndex = findOrCreateAmmoTypeIndex(ammoItem.getAmmoType());
+        if (typeIndex == -1) {
+            return new AmmoInsertResult(false, ammoStack);
+        }
+
+        int freeSpace = MAX_STORAGE_CAPACITY - ammoCount[typeIndex];
+        if (freeSpace <= 0) {
+            return new AmmoInsertResult(false, ammoStack);
+        }
+
+        int inserted = Math.min(freeSpace, ammoStack.getCount());
+        ammoCount[typeIndex] += inserted;
+
+        ItemStack remaining = ammoStack.copy();
+        remaining.shrink(inserted);
+        return new AmmoInsertResult(inserted > 0, remaining);
     }
 
     // Method to insert magazines
@@ -43,6 +67,9 @@ public class AmmoStorageLogic {
 
     // Try to consume ammo
     public boolean tryConsumeAmmo(AmmoType ammoType, int amount) {
+        if (ammoType == AmmoType.NONE || amount <= 0) {
+            return true;
+        }
         int typeIndex = findAmmoTypeIndex(ammoType);
 
         if (typeIndex == -1 || ammoCount[typeIndex] < amount) {
@@ -64,6 +91,23 @@ public class AmmoStorageLogic {
         return -1;
     }
 
+    private int findOrCreateAmmoTypeIndex(AmmoType ammoType) {
+        int existingIndex = findAmmoTypeIndex(ammoType);
+        if (existingIndex != -1) {
+            return existingIndex;
+        }
+
+        for (int i = 0; i < supportedAmmoTypes.length; i++) {
+            if (supportedAmmoTypes[i] == null || supportedAmmoTypes[i] == AmmoType.NONE || ammoCount[i] <= 0) {
+                supportedAmmoTypes[i] = ammoType;
+                ammoCount[i] = Math.max(0, ammoCount[i]);
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
     // Get current ammo count for a type
     public int getAmmoCount(AmmoType ammoType) {
         int index = findAmmoTypeIndex(ammoType);
@@ -73,6 +117,24 @@ public class AmmoStorageLogic {
     // Get supported ammo types
     public AmmoType[] getSupportedAmmoTypes() {
         return supportedAmmoTypes;
+    }
+
+    public AmmoType getSupportedAmmoType(int slot) {
+        if (slot < 0 || slot >= supportedAmmoTypes.length) {
+            return AmmoType.NONE;
+        }
+        return supportedAmmoTypes[slot] == null ? AmmoType.NONE : supportedAmmoTypes[slot];
+    }
+
+    public int getAmmoCountForSlot(int slot) {
+        if (slot < 0 || slot >= ammoCount.length) {
+            return 0;
+        }
+        return ammoCount[slot];
+    }
+
+    public int getStorageCapacity() {
+        return MAX_STORAGE_CAPACITY;
     }
 
     // Result class for magazine insertion
@@ -86,14 +148,38 @@ public class AmmoStorageLogic {
         }
     }
 
+    public static class AmmoInsertResult {
+        public final boolean accepted;
+        public final ItemStack remainingAmmoStack;
+
+        public AmmoInsertResult(boolean accepted, ItemStack remainingAmmoStack) {
+            this.accepted = accepted;
+            this.remainingAmmoStack = remainingAmmoStack;
+        }
+    }
+
     public void setSupportedAmmoTypes(AmmoType type, int slot) {
         if (slot < 0 || type == null || slot >= supportedAmmoTypes.length) {
             return;
         }
-        if (ammoCount[slot] > 0) {
-
-
-        }
         supportedAmmoTypes[slot] = type;
+    }
+
+    public void save(CompoundTag tag) {
+        for (int i = 0; i < supportedAmmoTypes.length; i++) {
+            AmmoType type = supportedAmmoTypes[i];
+            tag.putString("ammo_type_" + i, type == null ? AmmoType.NONE.name() : type.name());
+            tag.putInt("ammo_count_" + i, ammoCount[i]);
+        }
+    }
+
+    public void load(CompoundTag tag) {
+        for (int i = 0; i < supportedAmmoTypes.length; i++) {
+            supportedAmmoTypes[i] = AmmoType.getType(tag.getString("ammo_type_" + i));
+            ammoCount[i] = Math.max(0, tag.getInt("ammo_count_" + i));
+            if (ammoCount[i] == 0 && supportedAmmoTypes[i] == AmmoType.NONE) {
+                supportedAmmoTypes[i] = null;
+            }
+        }
     }
 }

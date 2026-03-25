@@ -1,14 +1,16 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "openmodularturrets:relativistic_turret"
-  },
   "variants": {
-    "normal": [
-      {}
-    ],
-    "inventory": [
-      {}
-    ]
+    "face=floor,facing=north": {"model": "openmodularturrets:block/relativistic_turret"},
+    "face=floor,facing=east": {"model": "openmodularturrets:block/relativistic_turret", "y": 90},
+    "face=floor,facing=south": {"model": "openmodularturrets:block/relativistic_turret", "y": 180},
+    "face=floor,facing=west": {"model": "openmodularturrets:block/relativistic_turret", "y": 270},
+    "face=wall,facing=north": {"model": "openmodularturrets:block/relativistic_turret", "x": 90},
+    "face=wall,facing=east": {"model": "openmodularturrets:block/relativistic_turret", "x": 90, "y": 90},
+    "face=wall,facing=south": {"model": "openmodularturrets:block/relativistic_turret", "x": 90, "y": 180},
+    "face=wall,facing=west": {"model": "openmodularturrets:block/relativistic_turret", "x": 90, "y": 270},
+    "face=ceiling,facing=north": {"model": "openmodularturrets:block/relativistic_turret", "x": 180},
+    "face=ceiling,facing=east": {"model": "openmodularturrets:block/relativistic_turret", "x": 180, "y": 90},
+    "face=ceiling,facing=south": {"model": "openmodularturrets:block/relativistic_turret", "x": 180, "y": 180},
+    "face=ceiling,facing=west": {"model": "openmodularturrets:block/relativistic_turret", "x": 180, "y": 270}
   }
 }
