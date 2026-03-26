@@ -1,0 +1,24 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "misc",
+    "key":  {
+                "M":  {
+                          "item":  "minecraft:ender_eye"
+                      },
+                "P":  {
+                          "item":  "openmodularturrets:chamber_tier_three"
+                      },
+                "C":  {
+                          "item":  "openmodularturrets:sensor_tier_four"
+                      }
+            },
+    "pattern":  [
+                    "MMM",
+                    "PCP",
+                    "MMM"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "openmodularturrets:chamber_tier_four"
+               }
+}

@@ -1,0 +1,27 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "misc",
+    "key":  {
+                "O":  {
+                          "item":  "minecraft:observer"
+                      },
+                "R":  {
+                          "item":  "minecraft:repeater"
+                      },
+                "B":  {
+                          "item":  "openmodularturrets:io_bus"
+                      },
+                "C":  {
+                          "item":  "minecraft:comparator"
+                      }
+            },
+    "pattern":  [
+                    " O ",
+                    "CBC",
+                    " R "
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "openmodularturrets:addon_serial_port"
+               }
+}

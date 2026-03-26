@@ -1,0 +1,27 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "misc",
+    "key":  {
+                "F":  {
+                          "item":  "openmodularturrets:upgrade_fire_rate"
+                      },
+                "Q":  {
+                          "item":  "minecraft:quartz"
+                      },
+                "P":  {
+                          "item":  "minecraft:piston"
+                      },
+                "H":  {
+                          "item":  "minecraft:tripwire_hook"
+                      }
+            },
+    "pattern":  [
+                    " P ",
+                    "FHF",
+                    " Q "
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "openmodularturrets:upgrade_scatter_shot"
+               }
+}

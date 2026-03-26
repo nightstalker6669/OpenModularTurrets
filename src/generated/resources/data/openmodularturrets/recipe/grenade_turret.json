@@ -1,0 +1,27 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "redstone",
+    "key":  {
+                "T":  {
+                          "item":  "openmodularturrets:ammo_grenade"
+                      },
+                "B":  {
+                          "item":  "openmodularturrets:barrel_tier_three"
+                      },
+                "C":  {
+                          "item":  "openmodularturrets:chamber_tier_three"
+                      },
+                "I":  {
+                          "item":  "openmodularturrets:io_bus"
+                      }
+            },
+    "pattern":  [
+                    " T ",
+                    "BCB",
+                    " I "
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "openmodularturrets:grenade_turret"
+               }
+}

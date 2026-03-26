@@ -1,16 +1,16 @@
 package com.ommods.openmodularturrets.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class TurretSettings {
     public final String name;
-    public final ForgeConfigSpec.ConfigValue<Integer> powerUsage;
-    public final ForgeConfigSpec.ConfigValue<Integer> range;
-    public final ForgeConfigSpec.ConfigValue<Double> fireRate;
-    public final ForgeConfigSpec.ConfigValue<Double> damage;
-    public final ForgeConfigSpec.ConfigValue<Double> damageAddonModifierMaxHP;
+    public final ModConfigSpec.IntValue powerUsage;
+    public final ModConfigSpec.IntValue range;
+    public final ModConfigSpec.DoubleValue fireRate;
+    public final ModConfigSpec.DoubleValue damage;
+    public final ModConfigSpec.DoubleValue damageAddonModifierMaxHP;
 
-    public TurretSettings(ForgeConfigSpec.Builder builder, String name, int powerUsage, int range, double fireRate, double damage, double damageAddonModifierMaxHP) {
+    public TurretSettings(ModConfigSpec.Builder builder, String name, int powerUsage, int range, double fireRate, double damage, double damageAddonModifierMaxHP) {
         this.name = name;
         builder.push(name);
         this. powerUsage = builder.comment("Power usage for " + name).defineInRange("power_usage", powerUsage,0, Integer.MAX_VALUE);
@@ -22,7 +22,7 @@ public class TurretSettings {
     }
 
     // For non-damaging turrets
-    public TurretSettings(ForgeConfigSpec.Builder builder, String name, int powerUsage, int range, double fireRate) {
+    public TurretSettings(ModConfigSpec.Builder builder, String name, int powerUsage, int range, double fireRate) {
         this.name = name;
         builder.push(name);
         this. powerUsage = builder.comment("Power usage for " + name).defineInRange("power_usage", powerUsage,0, Integer.MAX_VALUE);

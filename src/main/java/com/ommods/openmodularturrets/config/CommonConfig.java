@@ -1,12 +1,12 @@
 package com.ommods.openmodularturrets.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class CommonConfig {
-    public final ForgeConfigSpec.ConfigValue<Boolean> doDebugChat;
-    public final ForgeConfigSpec.ConfigValue<Boolean> debugLogging;
+    public final ModConfigSpec.BooleanValue doDebugChat;
+    public final ModConfigSpec.BooleanValue debugLogging;
 
-    public CommonConfig(ForgeConfigSpec.Builder builder) {
+    public CommonConfig(ModConfigSpec.Builder builder) {
         builder.push("DEBUG");
         this.doDebugChat = builder.comment("Should some blocks write debug messages on interaction?")
                 .define("doDebugChat", false);

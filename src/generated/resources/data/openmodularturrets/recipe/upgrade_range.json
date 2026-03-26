@@ -1,0 +1,27 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "misc",
+    "key":  {
+                "G":  {
+                          "item":  "minecraft:gold_ingot"
+                      },
+                "S":  {
+                          "item":  "minecraft:spyglass"
+                      },
+                "B":  {
+                          "item":  "openmodularturrets:io_bus"
+                      },
+                "Q":  {
+                          "item":  "minecraft:quartz"
+                      }
+            },
+    "pattern":  [
+                    " G ",
+                    "SBS",
+                    " Q "
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "openmodularturrets:upgrade_range"
+               }
+}

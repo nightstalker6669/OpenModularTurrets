@@ -5,9 +5,11 @@ import com.ommods.openmodularturrets.OMTBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
@@ -27,7 +29,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public abstract class TurretBaseBlock extends AbstractOMLibBlockWithEntity {
-
     public TurretBaseBlock(Properties pProperties) {
         super(pProperties);
     }
@@ -96,19 +97,33 @@ public abstract class TurretBaseBlock extends AbstractOMLibBlockWithEntity {
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
 
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (player.isSecondaryUseActive()) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+
+        InteractionResult result = OM_use(state, level, pos, player, hand, hitResult);
+        if (!result.consumesAction()) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+        return ItemInteractionResult.sidedSuccess(level.isClientSide());
+    }
+
     private static void openTurretBaseMenu(ServerPlayer serverPlayer, TurretBaseBlockEntity turretBaseBlockEntity, BlockPos pos) {
         try {
-            Class<?> extensionClass = Class.forName("net.neoforged.neoforge.common.extensions.IPlayerExtension");
-            Method openMenuMethod = extensionClass.getMethod("openMenu", net.minecraft.world.MenuProvider.class, java.util.function.Consumer.class);
+            Method openMenuMethod = ServerPlayer.class.getMethod("openMenu", net.minecraft.world.MenuProvider.class, java.util.function.Consumer.class);
             openMenuMethod.invoke(serverPlayer, turretBaseBlockEntity, (java.util.function.Consumer<Object>) buffer -> {
                 try {
                     Method writeBlockPos = buffer.getClass().getMethod("writeBlockPos", BlockPos.class);
                     writeBlockPos.invoke(buffer, pos);
+                    Method writeVarInt = buffer.getClass().getMethod("writeVarInt", int.class);
+                    writeVarInt.invoke(buffer, turretBaseBlockEntity.getTier());
                 } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException exception) {
                     throw new IllegalStateException("Failed to write turret base menu position", exception);
                 }
             });
-        } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException exception) {
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException exception) {
             throw new IllegalStateException("Failed to open turret base menu", exception);
         }
     }

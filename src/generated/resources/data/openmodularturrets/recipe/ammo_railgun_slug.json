@@ -1,0 +1,21 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "combat",
+    "key":  {
+                "I":  {
+                          "item":  "minecraft:iron_ingot"
+                      },
+                "C":  {
+                          "item":  "minecraft:copper_ingot"
+                      }
+            },
+    "pattern":  [
+                    " I ",
+                    "ICI",
+                    " I "
+                ],
+    "result":  {
+                   "count":  8,
+                   "id":  "openmodularturrets:ammo_railgun_slug"
+               }
+}

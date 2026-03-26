@@ -1,0 +1,30 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "redstone",
+    "key":  {
+                "N":  {
+                          "item":  "minecraft:nether_star"
+                      },
+                "S":  {
+                          "item":  "openmodularturrets:sensor_tier_five"
+                      },
+                "B":  {
+                          "item":  "openmodularturrets:barrel_tier_five"
+                      },
+                "C":  {
+                          "item":  "openmodularturrets:chamber_tier_five"
+                      },
+                "I":  {
+                          "item":  "openmodularturrets:io_bus"
+                      }
+            },
+    "pattern":  [
+                    " N ",
+                    "SBS",
+                    "ICI"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "openmodularturrets:relativistic_turret"
+               }
+}

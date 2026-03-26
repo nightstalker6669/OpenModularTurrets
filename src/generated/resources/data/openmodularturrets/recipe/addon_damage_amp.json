@@ -1,0 +1,27 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "misc",
+    "key":  {
+                "D":  {
+                          "item":  "minecraft:diamond"
+                      },
+                "B":  {
+                          "item":  "openmodularturrets:io_bus"
+                      },
+                "Q":  {
+                          "item":  "minecraft:quartz"
+                      },
+                "S":  {
+                          "item":  "minecraft:iron_sword"
+                      }
+            },
+    "pattern":  [
+                    " D ",
+                    "QBQ",
+                    " S "
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "openmodularturrets:addon_damage_amp"
+               }
+}

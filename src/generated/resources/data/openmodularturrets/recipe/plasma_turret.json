@@ -1,0 +1,30 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "redstone",
+    "key":  {
+                "A":  {
+                          "item":  "minecraft:amethyst_shard"
+                      },
+                "R":  {
+                          "item":  "openmodularturrets:barrel_tier_five"
+                      },
+                "B":  {
+                          "item":  "minecraft:blaze_rod"
+                      },
+                "C":  {
+                          "item":  "openmodularturrets:chamber_tier_five"
+                      },
+                "I":  {
+                          "item":  "openmodularturrets:io_bus"
+                      }
+            },
+    "pattern":  [
+                    " B ",
+                    "ACA",
+                    "RIR"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "openmodularturrets:plasma_turret"
+               }
+}

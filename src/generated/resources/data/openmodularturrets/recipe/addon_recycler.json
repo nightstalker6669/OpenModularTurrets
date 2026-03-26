@@ -1,0 +1,27 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "misc",
+    "key":  {
+                "R":  {
+                          "item":  "minecraft:redstone"
+                      },
+                "B":  {
+                          "item":  "openmodularturrets:io_bus"
+                      },
+                "H":  {
+                          "item":  "minecraft:hopper"
+                      },
+                "I":  {
+                          "item":  "minecraft:iron_ingot"
+                      }
+            },
+    "pattern":  [
+                    " I ",
+                    "HBH",
+                    " R "
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "openmodularturrets:addon_recycler"
+               }
+}

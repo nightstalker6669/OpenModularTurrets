@@ -2,24 +2,18 @@ package com.ommods.openmodularturrets.client;
 
 import com.ommods.openmodularturrets.OMTMenus;
 import com.ommods.openmodularturrets.client.screen.TurretBaseScreen;
-import net.minecraft.world.inventory.MenuType;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
-import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.Map;
 
 public final class OMTMenuScreenRegistrar {
     private OMTMenuScreenRegistrar() {
     }
 
-    @SuppressWarnings("unchecked")
     public static void register(RegisterMenuScreensEvent event) {
         try {
-            Field field = RegisterMenuScreensEvent.class.getDeclaredField("registeredScreens");
-            field.setAccessible(true);
-            Map<MenuType<?>, Object> registeredScreens = (Map<MenuType<?>, Object>) field.get(event);
-
             Class<?> screenConstructorClass = Class.forName("net.minecraft.client.gui.screens.MenuScreens$ScreenConstructor");
             Object constructor = Proxy.newProxyInstance(
                 screenConstructorClass.getClassLoader(),
@@ -36,8 +30,9 @@ public final class OMTMenuScreenRegistrar {
                 }
             );
 
-            registeredScreens.put(OMTMenus.TURRET_BASE.get(), constructor);
-        } catch (ReflectiveOperationException exception) {
+            Method registerMethod = RegisterMenuScreensEvent.class.getMethod("register", net.minecraft.world.inventory.MenuType.class, screenConstructorClass);
+            registerMethod.invoke(event, OMTMenus.TURRET_BASE.get(), constructor);
+        } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException exception) {
             throw new IllegalStateException("Failed to register turret base screen", exception);
         }
     }

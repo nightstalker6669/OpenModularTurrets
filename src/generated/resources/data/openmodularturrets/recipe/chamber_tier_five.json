@@ -1,0 +1,24 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "misc",
+    "key":  {
+                "M":  {
+                          "item":  "minecraft:netherite_ingot"
+                      },
+                "P":  {
+                          "item":  "openmodularturrets:chamber_tier_four"
+                      },
+                "C":  {
+                          "item":  "openmodularturrets:sensor_tier_five"
+                      }
+            },
+    "pattern":  [
+                    "MMM",
+                    "PCP",
+                    "MMM"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "openmodularturrets:chamber_tier_five"
+               }
+}

@@ -1,37 +1,34 @@
 package com.ommods.openmodularturrets.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
-
-import java.util.Arrays;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class ServerConfig {
-    public final ForgeConfigSpec.ConfigValue<Boolean> canTurretsAttackMobs;
-    public final ForgeConfigSpec.ConfigValue<Boolean> canTurretsAttackPlayers;
-    public final ForgeConfigSpec.ConfigValue<Boolean> canTurretsAttackNeutralMobs;
-    public final ForgeConfigSpec.ConfigValue<Boolean> canOPAccessOwnedBlocks;
-    public final ForgeConfigSpec.ConfigValue<Boolean> offlineModeSupport;
-    public final ForgeConfigSpec.ConfigValue<String> recipes;
+    public final ModConfigSpec.BooleanValue canTurretsAttackMobs;
+    public final ModConfigSpec.BooleanValue canTurretsAttackPlayers;
+    public final ModConfigSpec.BooleanValue canTurretsAttackNeutralMobs;
+    public final ModConfigSpec.BooleanValue canOPAccessOwnedBlocks;
+    public final ModConfigSpec.BooleanValue offlineModeSupport;
 
-    public final ForgeConfigSpec.ConfigValue<Integer> baseTier1MaxCharge;
-    public final ForgeConfigSpec.ConfigValue<Integer> baseTier1MaxTransferRate;
-    public final ForgeConfigSpec.ConfigValue<Integer> baseTier1BlastResistance;
-    public final ForgeConfigSpec.ConfigValue<Integer> baseTier1DestroySpeed;
-    public final ForgeConfigSpec.ConfigValue<Integer> baseTier2MaxCharge;
-    public final ForgeConfigSpec.ConfigValue<Integer> baseTier2MaxTransferRate;
-    public final ForgeConfigSpec.ConfigValue<Integer> baseTier2BlastResistance;
-    public final ForgeConfigSpec.ConfigValue<Integer> baseTier2DestroySpeed;
-    public final ForgeConfigSpec.ConfigValue<Integer> baseTier3MaxCharge;
-    public final ForgeConfigSpec.ConfigValue<Integer> baseTier3MaxTransferRate;
-    public final ForgeConfigSpec.ConfigValue<Integer> baseTier3BlastResistance;
-    public final ForgeConfigSpec.ConfigValue<Integer> baseTier3DestroySpeed;
-    public final ForgeConfigSpec.ConfigValue<Integer> baseTier4MaxCharge;
-    public final ForgeConfigSpec.ConfigValue<Integer> baseTier4MaxTransferRate;
-    public final ForgeConfigSpec.ConfigValue<Integer> baseTier4BlastResistance;
-    public final ForgeConfigSpec.ConfigValue<Integer> baseTier4DestroySpeed;
-    public final ForgeConfigSpec.ConfigValue<Integer> baseTier5MaxCharge;
-    public final ForgeConfigSpec.ConfigValue<Integer> baseTier5MaxTransferRate;
-    public final ForgeConfigSpec.ConfigValue<Integer> baseTier5BlastResistance;
-    public final ForgeConfigSpec.ConfigValue<Integer> baseTier5DestroySpeed;
+    public final ModConfigSpec.IntValue baseTier1MaxCharge;
+    public final ModConfigSpec.IntValue baseTier1MaxTransferRate;
+    public final ModConfigSpec.IntValue baseTier1BlastResistance;
+    public final ModConfigSpec.IntValue baseTier1DestroySpeed;
+    public final ModConfigSpec.IntValue baseTier2MaxCharge;
+    public final ModConfigSpec.IntValue baseTier2MaxTransferRate;
+    public final ModConfigSpec.IntValue baseTier2BlastResistance;
+    public final ModConfigSpec.IntValue baseTier2DestroySpeed;
+    public final ModConfigSpec.IntValue baseTier3MaxCharge;
+    public final ModConfigSpec.IntValue baseTier3MaxTransferRate;
+    public final ModConfigSpec.IntValue baseTier3BlastResistance;
+    public final ModConfigSpec.IntValue baseTier3DestroySpeed;
+    public final ModConfigSpec.IntValue baseTier4MaxCharge;
+    public final ModConfigSpec.IntValue baseTier4MaxTransferRate;
+    public final ModConfigSpec.IntValue baseTier4BlastResistance;
+    public final ModConfigSpec.IntValue baseTier4DestroySpeed;
+    public final ModConfigSpec.IntValue baseTier5MaxCharge;
+    public final ModConfigSpec.IntValue baseTier5MaxTransferRate;
+    public final ModConfigSpec.IntValue baseTier5BlastResistance;
+    public final ModConfigSpec.IntValue baseTier5DestroySpeed;
 
     public final TurretSettings gunTurretSettings;
     public final TurretSettings laserTurretSettings;
@@ -48,7 +45,7 @@ public class ServerConfig {
     public final TurretSettings teleporterTurretSettings;
     public final TurretSettings relativisticTurretSettings;
 
-    public ServerConfig(ForgeConfigSpec.Builder builder) {
+    public ServerConfig(ModConfigSpec.Builder builder) {
         builder.push("GLOBAL_TARGETING");
         this.canTurretsAttackMobs = builder.comment("Can turrets attack mobs?")
                 .define("canTurretsAttackMobs", true);
@@ -59,8 +56,6 @@ public class ServerConfig {
         builder.pop();
 
         builder.push("GENERAL");
-        this.recipes = builder.comment("Which recipes to use. Valid values: auto,vanilla")
-                .defineInList("recipes", "auto", Arrays.asList("auto", "vanilla"));
         this.canOPAccessOwnedBlocks = builder.comment("Can operators access owned turret bases?")
                 .define("canOPAccessOwnedBlocks", true);
         this.offlineModeSupport = builder.comment("Enable offline-mode ownership support?")

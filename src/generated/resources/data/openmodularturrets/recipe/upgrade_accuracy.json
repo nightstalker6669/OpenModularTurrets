@@ -1,0 +1,27 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "misc",
+    "key":  {
+                "T":  {
+                          "item":  "minecraft:target"
+                      },
+                "G":  {
+                          "item":  "minecraft:gold_ingot"
+                      },
+                "B":  {
+                          "item":  "openmodularturrets:io_bus"
+                      },
+                "Q":  {
+                          "item":  "minecraft:quartz"
+                      }
+            },
+    "pattern":  [
+                    " Q ",
+                    "TBT",
+                    " G "
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "openmodularturrets:upgrade_accuracy"
+               }
+}

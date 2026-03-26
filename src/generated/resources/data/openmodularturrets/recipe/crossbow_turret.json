@@ -1,0 +1,27 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "redstone",
+    "key":  {
+                "R":  {
+                          "item":  "minecraft:string"
+                      },
+                "B":  {
+                          "item":  "openmodularturrets:barrel_tier_two"
+                      },
+                "C":  {
+                          "item":  "minecraft:crossbow"
+                      },
+                "I":  {
+                          "item":  "openmodularturrets:io_bus"
+                      }
+            },
+    "pattern":  [
+                    " C ",
+                    "BBB",
+                    "RIR"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "openmodularturrets:crossbow_turret"
+               }
+}

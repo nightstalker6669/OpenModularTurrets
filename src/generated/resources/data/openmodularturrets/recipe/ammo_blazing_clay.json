@@ -1,0 +1,24 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "combat",
+    "key":  {
+                "R":  {
+                          "item":  "minecraft:redstone"
+                      },
+                "B":  {
+                          "item":  "minecraft:clay_ball"
+                      },
+                "C":  {
+                          "item":  "minecraft:blaze_powder"
+                      }
+            },
+    "pattern":  [
+                    "BCB",
+                    "CRC",
+                    "BCB"
+                ],
+    "result":  {
+                   "count":  16,
+                   "id":  "openmodularturrets:ammo_blazing_clay"
+               }
+}

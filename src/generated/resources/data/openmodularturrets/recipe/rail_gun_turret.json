@@ -1,0 +1,30 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "redstone",
+    "key":  {
+                "L":  {
+                          "item":  "minecraft:lightning_rod"
+                      },
+                "D":  {
+                          "item":  "minecraft:diamond"
+                      },
+                "B":  {
+                          "item":  "openmodularturrets:barrel_tier_four"
+                      },
+                "C":  {
+                          "item":  "openmodularturrets:chamber_tier_four"
+                      },
+                "I":  {
+                          "item":  "openmodularturrets:io_bus"
+                      }
+            },
+    "pattern":  [
+                    " L ",
+                    "BCB",
+                    "DID"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "openmodularturrets:rail_gun_turret"
+               }
+}

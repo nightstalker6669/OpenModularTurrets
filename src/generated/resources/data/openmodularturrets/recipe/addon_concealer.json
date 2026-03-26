@@ -1,0 +1,27 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "misc",
+    "key":  {
+                "T":  {
+                          "item":  "minecraft:tinted_glass"
+                      },
+                "G":  {
+                          "item":  "minecraft:glass_pane"
+                      },
+                "S":  {
+                          "item":  "minecraft:sculk_sensor"
+                      },
+                "B":  {
+                          "item":  "openmodularturrets:io_bus"
+                      }
+            },
+    "pattern":  [
+                    " G ",
+                    "TBT",
+                    " S "
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "openmodularturrets:addon_concealer"
+               }
+}

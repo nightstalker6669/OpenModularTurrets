@@ -1,0 +1,24 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "misc",
+    "key":  {
+                "M":  {
+                          "item":  "minecraft:gold_ingot"
+                      },
+                "P":  {
+                          "item":  "openmodularturrets:sensor_tier_one"
+                      },
+                "C":  {
+                          "item":  "minecraft:comparator"
+                      }
+            },
+    "pattern":  [
+                    "MMM",
+                    "PCP",
+                    "MMM"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "openmodularturrets:sensor_tier_two"
+               }
+}

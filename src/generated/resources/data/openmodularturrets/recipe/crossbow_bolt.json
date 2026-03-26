@@ -1,0 +1,24 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "combat",
+    "key":  {
+                "N":  {
+                          "item":  "minecraft:iron_nugget"
+                      },
+                "A":  {
+                          "item":  "minecraft:arrow"
+                      },
+                "F":  {
+                          "item":  "minecraft:feather"
+                      }
+            },
+    "pattern":  [
+                    " N ",
+                    " A ",
+                    " F "
+                ],
+    "result":  {
+                   "count":  8,
+                   "id":  "openmodularturrets:crossbow_bolt"
+               }
+}

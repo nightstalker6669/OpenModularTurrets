@@ -2,8 +2,6 @@ package com.ommods.openmodularturrets.menu;
 
 import com.ommods.openmodularturrets.OMTMenus;
 import com.ommods.openmodularturrets.content.block.turret_bases.TurretBaseBlockEntity;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -14,8 +12,6 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-
 public class TurretBaseMenu extends AbstractContainerMenu {
     private static final int BASE_SLOT_COUNT = 13;
     private static final int PLAYER_INVENTORY_SLOT_COUNT = 27;
@@ -33,21 +29,31 @@ public class TurretBaseMenu extends AbstractContainerMenu {
     private final Container container;
     private final ContainerData data;
     private final ContainerLevelAccess access;
+    private final int menuTier;
 
-    public TurretBaseMenu(int containerId, Inventory playerInventory, RegistryFriendlyByteBuf buffer) {
-        this(containerId, playerInventory, resolveClientContainer(playerInventory, buffer));
+    public TurretBaseMenu(int containerId, Inventory playerInventory, net.minecraft.network.RegistryFriendlyByteBuf buffer) {
+        this(containerId, playerInventory, decodeClientState(buffer));
     }
 
-    private TurretBaseMenu(int containerId, Inventory playerInventory, ClientMenuContext context) {
-        this(containerId, playerInventory, context.container(), context.data());
+    public TurretBaseMenu(int containerId, Inventory playerInventory) {
+        this(containerId, playerInventory, new SimpleContainer(BASE_SLOT_COUNT), createClientData(1), 1);
     }
 
     public TurretBaseMenu(int containerId, Inventory playerInventory, Container container, ContainerData data) {
+        this(containerId, playerInventory, container, data, resolveMenuTier(container, data));
+    }
+
+    private TurretBaseMenu(int containerId, Inventory playerInventory, ClientMenuState clientState) {
+        this(containerId, playerInventory, new SimpleContainer(BASE_SLOT_COUNT), createClientData(clientState.tier()), clientState.tier());
+    }
+
+    private TurretBaseMenu(int containerId, Inventory playerInventory, Container container, ContainerData data, int menuTier) {
         super(OMTMenus.TURRET_BASE.get(), containerId);
         checkContainerSize(container, BASE_SLOT_COUNT);
         checkContainerDataCount(data, 13);
         this.container = container;
         this.data = data;
+        this.menuTier = menuTier;
         this.access = createAccess(playerInventory.player.level(), container);
         container.startOpen(playerInventory.player);
         this.addTurretBaseSlots(container);
@@ -55,44 +61,57 @@ public class TurretBaseMenu extends AbstractContainerMenu {
         this.addDataSlots(data);
     }
 
-    private static ClientMenuContext resolveClientContainer(Inventory playerInventory, RegistryFriendlyByteBuf buffer) {
-        BlockPos blockPos = buffer.readBlockPos();
-        return new ClientMenuContext(findContainer(playerInventory, blockPos), findData(playerInventory, blockPos));
-    }
-
-    private static Container findContainer(Inventory playerInventory, BlockPos blockPos) {
-        Level level = playerInventory.player.level();
-        if (level.getBlockEntity(blockPos) instanceof TurretBaseBlockEntity turretBaseBlockEntity) {
-            return turretBaseBlockEntity;
-        }
-        return new SimpleContainer(BASE_SLOT_COUNT);
-    }
-
-    private static ContainerData findData(Inventory playerInventory, BlockPos blockPos) {
-        Level level = playerInventory.player.level();
-        if (level.getBlockEntity(blockPos) instanceof TurretBaseBlockEntity turretBaseBlockEntity) {
-            return turretBaseBlockEntity.getMenuData();
-        }
-        return new SimpleContainerData(13);
-    }
-
-    private static ContainerLevelAccess createAccess(Level level, Container container) {
+    private static ContainerLevelAccess createAccess(net.minecraft.world.level.Level level, Container container) {
         if (container instanceof TurretBaseBlockEntity turretBaseBlockEntity) {
             return ContainerLevelAccess.create(level, turretBaseBlockEntity.getBlockPos());
         }
         return ContainerLevelAccess.NULL;
     }
 
+    private static ClientMenuState decodeClientState(net.minecraft.network.RegistryFriendlyByteBuf buffer) {
+        buffer.readBlockPos();
+        return new ClientMenuState(Math.max(1, buffer.readVarInt()));
+    }
+
+    private static ContainerData createClientData(int tier) {
+        SimpleContainerData data = new SimpleContainerData(13);
+        data.set(7, tier);
+        data.set(8, 2);
+        return data;
+    }
+
+    private static int resolveMenuTier(Container container, ContainerData data) {
+        if (container instanceof TurretBaseBlockEntity turretBaseBlockEntity) {
+            return turretBaseBlockEntity.getTier();
+        }
+        int syncedTier = data.get(7);
+        return Math.max(1, syncedTier);
+    }
+
     private void addTurretBaseSlots(Container container) {
         for (int row = 0; row < 3; row++) {
             for (int column = 0; column < 3; column++) {
-                this.addSlot(new Slot(container, column + row * 3, 8 + column * 18, 17 + row * 18));
+                this.addSlot(createValidatedSlot(container, column + row * 3, 8 + column * 18, 17 + row * 18, 64));
             }
         }
-        this.addSlot(new Slot(container, 9, getTier() > 1 ? 72 : -1000, getTier() > 1 ? 18 : -1000));
-        this.addSlot(new Slot(container, 10, getTier() > 1 ? 92 : -1000, getTier() > 1 ? 18 : -1000));
-        this.addSlot(new Slot(container, 11, getTier() > 1 ? 72 : -1000, getTier() > 1 ? 52 : -1000));
-        this.addSlot(new Slot(container, 12, getTier() > 4 ? 92 : -1000, getTier() > 4 ? 52 : -1000));
+        this.addSlot(createValidatedSlot(container, 9, menuTier > 1 ? 72 : -1000, menuTier > 1 ? 18 : -1000, 1));
+        this.addSlot(createValidatedSlot(container, 10, menuTier > 1 ? 92 : -1000, menuTier > 1 ? 18 : -1000, 1));
+        this.addSlot(createValidatedSlot(container, 11, menuTier > 1 ? 72 : -1000, menuTier > 1 ? 52 : -1000, 1));
+        this.addSlot(createValidatedSlot(container, 12, menuTier > 4 ? 92 : -1000, menuTier > 4 ? 52 : -1000, 1));
+    }
+
+    private Slot createValidatedSlot(Container container, int slotIndex, int x, int y, int maxStackSize) {
+        return new Slot(container, slotIndex, x, y) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return container.canPlaceItem(slotIndex, stack);
+            }
+
+            @Override
+            public int getMaxStackSize(ItemStack stack) {
+                return maxStackSize;
+            }
+        };
     }
 
     private void addPlayerInventorySlots(Inventory playerInventory) {
@@ -128,7 +147,10 @@ public class TurretBaseMenu extends AbstractContainerMenu {
     }
 
     public int getTier() {
-        return this.data.get(7);
+        return Math.max(this.menuTier, this.data.get(7));
+    }
+
+    private record ClientMenuState(int tier) {
     }
 
     public int getYAxisDetect() {
@@ -232,8 +254,5 @@ public class TurretBaseMenu extends AbstractContainerMenu {
     public void removed(Player player) {
         super.removed(player);
         this.container.stopOpen(player);
-    }
-
-    private record ClientMenuContext(Container container, ContainerData data) {
     }
 }

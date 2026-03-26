@@ -65,8 +65,8 @@ public class TurretBaseScreen extends AbstractContainerScreen<TurretBaseMenu> {
         guiGraphics.drawString(this.font, Component.translatable("text.openmodularturrets.gui.inventory"), this.inventoryLabelX, this.inventoryLabelY, 0x404040, false);
         guiGraphics.drawString(this.font, Component.literal("-Y"), 123, 6, 0x404040, false);
         guiGraphics.drawString(this.font, Component.literal(Integer.toString(this.menu.getYAxisDetect())), 127, 39, 0x9C40FF, false);
-        guiGraphics.drawString(this.font, getAmmoSummaryLine(0), 108, 74, 0x404040, false);
-        guiGraphics.drawString(this.font, getAmmoSummaryLine(1), 108, 84, 0x404040, false);
+        guiGraphics.drawString(this.font, getAmmoSummaryLine(0), 106, 56, 0x404040, false);
+        guiGraphics.drawString(this.font, getAmmoSummaryLine(1), 106, 66, 0x404040, false);
     }
 
     private Component formatAmmoLine(int slot) {
@@ -91,7 +91,24 @@ public class TurretBaseScreen extends AbstractContainerScreen<TurretBaseMenu> {
         if (ammoType == AmmoType.NONE || this.menu.getAmmoCount(slot) <= 0) {
             return Component.literal("A" + (slot + 1) + ": Empty");
         }
-        return Component.literal("A" + (slot + 1) + ": " + ammoType.name().toLowerCase() + " x" + this.menu.getAmmoCount(slot));
+        return Component.literal("A" + (slot + 1) + ": " + getAmmoShortName(ammoType) + " x" + this.menu.getAmmoCount(slot));
+    }
+
+    private String getAmmoShortName(AmmoType ammoType) {
+        return switch (ammoType) {
+            case BULLET -> "Bullet";
+            case ROCKET_SMALL -> "Rocket";
+            case ROCKET_LARGE -> "L.Rocket";
+            case RAILGUN_SLUG -> "Slug";
+            case CROSSBOW_BOLT -> "Bolt";
+            case FIRE_CHARGE -> "Fire";
+            case GRENADE -> "Grenade";
+            case ARTILLERY_SHELL -> "Shell";
+            case POTATO -> "Potato";
+            case BLAZING_CLAY -> "Clay";
+            case DISPOSABLE_ITEM -> "Item";
+            case NONE -> "Empty";
+        };
     }
 
     private ResourceLocation getTextureForTier(int tier) {
@@ -126,7 +143,7 @@ public class TurretBaseScreen extends AbstractContainerScreen<TurretBaseMenu> {
         if (isHovering(153, 17, 14, 51, mouseX, mouseY)) {
             guiGraphics.renderTooltip(this.font, Component.translatable("screen.openmodularturrets.turret_base.energy", this.menu.getEnergyStored(), this.menu.getEnergyCapacity()), mouseX, mouseY);
         }
-        if (isHovering(108, 16, 40, 86, mouseX, mouseY)) {
+        if (isHovering(104, 54, 56, 24, mouseX, mouseY)) {
             guiGraphics.renderComponentTooltip(
                 this.font,
                 List.of(

@@ -1,0 +1,27 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "combat",
+    "key":  {
+                "F":  {
+                          "item":  "minecraft:firework_rocket"
+                      },
+                "G":  {
+                          "item":  "minecraft:gunpowder"
+                      },
+                "P":  {
+                          "item":  "minecraft:paper"
+                      },
+                "I":  {
+                          "item":  "minecraft:iron_nugget"
+                      }
+            },
+    "pattern":  [
+                    " P ",
+                    "FGF",
+                    " I "
+                ],
+    "result":  {
+                   "count":  4,
+                   "id":  "openmodularturrets:ammo_rocket_small"
+               }
+}

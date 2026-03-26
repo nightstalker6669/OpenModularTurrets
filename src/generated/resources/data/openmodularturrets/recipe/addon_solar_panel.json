@@ -1,0 +1,27 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "misc",
+    "key":  {
+                "G":  {
+                          "item":  "minecraft:glass"
+                      },
+                "D":  {
+                          "item":  "minecraft:daylight_detector"
+                      },
+                "B":  {
+                          "item":  "openmodularturrets:io_bus"
+                      },
+                "C":  {
+                          "item":  "minecraft:copper_ingot"
+                      }
+            },
+    "pattern":  [
+                    " G ",
+                    "DBD",
+                    " C "
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "openmodularturrets:addon_solar_panel"
+               }
+}

@@ -1,0 +1,27 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "misc",
+    "key":  {
+                "R":  {
+                          "item":  "minecraft:redstone_block"
+                      },
+                "B":  {
+                          "item":  "openmodularturrets:io_bus"
+                      },
+                "C":  {
+                          "item":  "minecraft:copper_ingot"
+                      },
+                "I":  {
+                          "item":  "minecraft:iron_ingot"
+                      }
+            },
+    "pattern":  [
+                    "IRI",
+                    "RBR",
+                    "ICI"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "openmodularturrets:addon_redstone_reactor"
+               }
+}

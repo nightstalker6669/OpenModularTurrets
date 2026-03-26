@@ -38,6 +38,8 @@ import org.joml.Vector3f;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 public abstract class DirectedTurretBlockEntity extends BlockEntity {
     protected float yaw = 180.0F;
@@ -50,6 +52,8 @@ public abstract class DirectedTurretBlockEntity extends BlockEntity {
     protected int syncCooldown;
     protected int shotCooldown;
     protected int activityTicks;
+    @Nullable
+    protected UUID trackedTargetId;
 
     protected DirectedTurretBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -177,6 +181,8 @@ public abstract class DirectedTurretBlockEntity extends BlockEntity {
     }
 
     protected void tickServer(Level level, BlockPos pos) {
+        TurretBaseBlockEntity previousBase = this.findAttachedBase(level, pos);
+        boolean wasConcealed = this.isConcealed(previousBase);
         this.idlePhase += 0.045F;
         if (this.shotCooldown > 0) {
             this.shotCooldown--;
@@ -187,6 +193,7 @@ public abstract class DirectedTurretBlockEntity extends BlockEntity {
 
         TurretBaseBlockEntity base = this.findAttachedBase(level, pos);
         LivingEntity target = base == null ? null : this.findTarget(level, pos, base);
+        this.trackedTargetId = target == null ? null : target.getUUID();
 
         if (target == null) {
             this.targetYaw = 180.0F + Mth.sin(this.idlePhase) * this.getIdleSweepDegrees();
@@ -208,9 +215,10 @@ public abstract class DirectedTurretBlockEntity extends BlockEntity {
             this.tryFire(level, pos, base, target);
         }
 
-        if (Math.abs(Mth.degreesDifference(oldYaw, this.yaw)) > 0.01F || Math.abs(oldPitch - this.pitch) > 0.01F) {
+        boolean concealmentChanged = wasConcealed != this.isConcealed(base);
+        if (concealmentChanged || Math.abs(Mth.degreesDifference(oldYaw, this.yaw)) > 0.01F || Math.abs(oldPitch - this.pitch) > 0.01F) {
             this.setChanged();
-            this.syncCooldown++;
+            this.syncCooldown = concealmentChanged ? 3 : this.syncCooldown + 1;
             if (this.syncCooldown >= 3) {
                 this.syncCooldown = 0;
                 level.sendBlockUpdated(pos, this.getBlockState(), this.getBlockState(), 3);
@@ -333,11 +341,26 @@ public abstract class DirectedTurretBlockEntity extends BlockEntity {
             candidates.addAll(level.getEntitiesOfClass(Player.class, searchBox, player -> player.isAlive() && !player.isSpectator() && !player.isCreative()));
         }
 
-        return candidates.stream()
+        List<LivingEntity> validTargets = candidates.stream()
             .filter(entity -> this.isWithinVerticalAllowance(pos, entity, verticalAllowance))
             .filter(entity -> this.canSee(level, pos, entity))
-            .min(Comparator.comparingDouble(entity -> entity.distanceToSqr(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D)))
-            .orElse(null);
+            .sorted(Comparator.comparingDouble(entity -> entity.distanceToSqr(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D)))
+            .toList();
+
+        if (validTargets.isEmpty()) {
+            return null;
+        }
+        if (!base.isMultiTargeting()) {
+            return validTargets.getFirst();
+        }
+
+        Set<UUID> claimedTargets = base.getClaimedTargetIds(this);
+        for (LivingEntity candidate : validTargets) {
+            if (!claimedTargets.contains(candidate.getUUID())) {
+                return candidate;
+            }
+        }
+        return validTargets.getFirst();
     }
 
     private int getVerticalTargetAllowance(@Nullable TurretBaseBlockEntity base) {
@@ -462,11 +485,20 @@ public abstract class DirectedTurretBlockEntity extends BlockEntity {
     }
 
     public boolean isConcealed() {
-        if (this.level == null || this.level.isClientSide()) {
+        if (this.level == null) {
             return false;
         }
         TurretBaseBlockEntity base = this.findAttachedBase(this.level, this.worldPosition);
+        return this.isConcealed(base);
+    }
+
+    protected boolean isConcealed(@Nullable TurretBaseBlockEntity base) {
         return base != null && base.hasConcealerAddon() && this.activityTicks <= 0;
+    }
+
+    @Nullable
+    public UUID getTrackedTargetId() {
+        return this.trackedTargetId;
     }
 
     @Override
@@ -481,6 +513,9 @@ public abstract class DirectedTurretBlockEntity extends BlockEntity {
         tag.putFloat("idle_phase", this.idlePhase);
         tag.putInt("shot_cooldown", this.shotCooldown);
         tag.putInt("activity_ticks", this.activityTicks);
+        if (this.trackedTargetId != null) {
+            tag.putUUID("tracked_target", this.trackedTargetId);
+        }
     }
 
     @Override
@@ -495,6 +530,7 @@ public abstract class DirectedTurretBlockEntity extends BlockEntity {
         this.idlePhase = tag.getFloat("idle_phase");
         this.shotCooldown = tag.getInt("shot_cooldown");
         this.activityTicks = tag.getInt("activity_ticks");
+        this.trackedTargetId = tag.hasUUID("tracked_target") ? tag.getUUID("tracked_target") : null;
     }
 
     @Override

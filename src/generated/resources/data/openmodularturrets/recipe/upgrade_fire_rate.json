@@ -1,0 +1,27 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "misc",
+    "key":  {
+                "G":  {
+                          "item":  "minecraft:gold_ingot"
+                      },
+                "B":  {
+                          "item":  "openmodularturrets:io_bus"
+                      },
+                "Q":  {
+                          "item":  "minecraft:quartz"
+                      },
+                "R":  {
+                          "item":  "minecraft:repeater"
+                      }
+            },
+    "pattern":  [
+                    " Q ",
+                    "GBG",
+                    " R "
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "openmodularturrets:upgrade_fire_rate"
+               }
+}

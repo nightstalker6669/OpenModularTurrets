@@ -1,0 +1,27 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "combat",
+    "key":  {
+                "T":  {
+                          "item":  "minecraft:tnt"
+                      },
+                "G":  {
+                          "item":  "minecraft:gunpowder"
+                      },
+                "P":  {
+                          "item":  "minecraft:paper"
+                      },
+                "I":  {
+                          "item":  "minecraft:iron_ingot"
+                      }
+            },
+    "pattern":  [
+                    " I ",
+                    "TGT",
+                    " P "
+                ],
+    "result":  {
+                   "count":  4,
+                   "id":  "openmodularturrets:ammo_grenade"
+               }
+}

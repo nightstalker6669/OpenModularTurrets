@@ -1,0 +1,30 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "redstone",
+    "key":  {
+                "B":  {
+                          "item":  "openmodularturrets:io_bus"
+                      },
+                "P":  {
+                          "item":  "openmodularturrets:turret_base_tier_3"
+                      },
+                "M":  {
+                          "item":  "minecraft:ender_eye"
+                      },
+                "S":  {
+                          "item":  "openmodularturrets:sensor_tier_four"
+                      },
+                "C":  {
+                          "item":  "openmodularturrets:chamber_tier_four"
+                      }
+            },
+    "pattern":  [
+                    "MSM",
+                    "PBP",
+                    "MCM"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "openmodularturrets:turret_base_tier_4"
+               }
+}

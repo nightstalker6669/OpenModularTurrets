@@ -33,6 +33,9 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraftforge.energy.EnergyStorage;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import java.util.function.Predicate;
 
 public class TurretBaseBlockEntity extends BlockEntityStorageEnergy implements Container, MenuProvider {
@@ -260,6 +263,26 @@ public class TurretBaseBlockEntity extends BlockEntityStorageEnergy implements C
 
     public boolean isMultiTargeting() {
         return multiTargeting;
+    }
+
+    public Set<UUID> getClaimedTargetIds(@NotNull DirectedTurretBlockEntity requestingTurret) {
+        Set<UUID> claimedTargets = new HashSet<>();
+        if (this.level == null) {
+            return claimedTargets;
+        }
+
+        for (Direction direction : Direction.values()) {
+            BlockEntity blockEntity = this.level.getBlockEntity(this.getBlockPos().relative(direction));
+            if (!(blockEntity instanceof DirectedTurretBlockEntity turret) || turret == requestingTurret) {
+                continue;
+            }
+
+            UUID trackedTargetId = turret.getTrackedTargetId();
+            if (trackedTargetId != null) {
+                claimedTargets.add(trackedTargetId);
+            }
+        }
+        return claimedTargets;
     }
 
     public boolean hasAddon(Item item) {

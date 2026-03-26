@@ -1,0 +1,30 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "redstone",
+    "key":  {
+                "C":  {
+                          "item":  "openmodularturrets:chamber_tier_three"
+                      },
+                "R":  {
+                          "item":  "minecraft:redstone"
+                      },
+                "S":  {
+                          "item":  "openmodularturrets:sensor_tier_three"
+                      },
+                "B":  {
+                          "item":  "openmodularturrets:barrel_tier_three"
+                      },
+                "Q":  {
+                          "item":  "minecraft:quartz"
+                      }
+            },
+    "pattern":  [
+                    " Q ",
+                    "SBS",
+                    "RCR"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "openmodularturrets:laser_turret"
+               }
+}

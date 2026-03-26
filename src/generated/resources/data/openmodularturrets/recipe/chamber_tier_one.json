@@ -1,0 +1,27 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "redstone",
+    "key":  {
+                "D":  {
+                          "item":  "minecraft:dispenser"
+                      },
+                "S":  {
+                          "item":  "openmodularturrets:sensor_tier_one"
+                      },
+                "B":  {
+                          "item":  "openmodularturrets:io_bus"
+                      },
+                "I":  {
+                          "item":  "minecraft:iron_ingot"
+                      }
+            },
+    "pattern":  [
+                    "III",
+                    "SDS",
+                    "IBI"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "openmodularturrets:chamber_tier_one"
+               }
+}
